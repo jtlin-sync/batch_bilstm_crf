@@ -91,7 +91,7 @@ class CRF(nn.Module):
         return torch.full(size_shape, 0, dtype=torch.long, device=self.device)
 
     def _iter_legal_batch(self, batch_input_lens, reverse=False):
-        index = torch.range(0, batch_input_lens.sum() - 1, dtype=torch.long)
+        index = torch.arange(0, batch_input_lens.sum(), dtype=torch.long)
         packed_index = rnn_utils.pack_sequence(
             torch.split(index, batch_input_lens.tolist())
         )
